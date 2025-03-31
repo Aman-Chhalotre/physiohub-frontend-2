@@ -282,7 +282,7 @@ const ProfileCard = () => {
                 className="w-30 h-30 rounded-full border-4"
             />
             <h2 className="text-lg font-semibold mt-4 text-[#232B2B]">Sarthak</h2>
-            <p className="text-xs sm:text-sm text-gray-500 text-[#687494] mt-1">Joined 2 years ago</p>
+            <p className="text-xs sm:text-sm  text-[#687494] mt-1">Joined 2 years ago</p>
             <div className='flex w-full bg-[#F6F9FC] rounded-lg py-3 mt-4'>
                 <div className='flex flex-col justify-center items-center w-1/2'>
                     <span className="font-semibold text-md sm:text-lg">8</span>
