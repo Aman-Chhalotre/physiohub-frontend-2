@@ -78,30 +78,17 @@ function Header() {
               <a href="#" className="block text-gray-700 hover:text-purple-600">
                 Contact
               </a>
-              <button className="w-full border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
+              <Link href={"/auth/login"} className="w-full border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
                 Login
-              </button>
-              <button className="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+              </Link>
+              <Link href={"/auth/signup"} className="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
                 Sign In
-              </button>
+              </Link>
             </div>
           )}
         </nav>
       </div>
 
-      {/* Mobile Menu
-      {isOpen && (
-        <div className="md:hidden bg-white shadow-md p-4 space-y-4">
-          <a href="#" className="block text-gray-700 hover:text-purple-600">Features</a>
-          <a href="#" className="block text-gray-700 hover:text-purple-600">Articles</a>
-          <a href="#" className="block text-gray-700 hover:text-purple-600">About Us</a>
-          <a href="#" className="block text-gray-700 hover:text-purple-600">Contact</a>
-          <Link href={"/auth/login"} className="w-full border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">Login</Link>
-          <Link href={"/auth/signup"} className="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">Sign In</Link>
-        </div>
-      )}
-    </nav>
-        </div> */}
     </>
   );
 }

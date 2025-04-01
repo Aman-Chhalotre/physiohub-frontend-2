@@ -8,6 +8,7 @@ import { FaChartLine, FaFileAlt, FaHeadset, FaStar } from "react-icons/fa";
 
 import LottiePlayer from "../components/animations/LottiePlayer";
 import run from "../components/animations/data/Happy.json"
+import Link from "next/link";
 
 
 function Home() {
@@ -54,7 +55,7 @@ function Home() {
       <div className="h-full w-full mt-10 relative overflow-hidden">
         <section className="relative bg-gradient-to-r from-gray-100 to-purple-100 py-16 px-6 md:px-12 lg:px-24 flex flex-col md:flex-row items-center">
           {/* Left Content */}
-          <div className="md:w-1/2 text-center md:text-left">
+          <div className="md:w-1/2 text-center md:text-left z-10">
             <p className="text-sm text-purple-600 font-semibold">
               OVER 200+ RESOURCES
             </p>
@@ -68,9 +69,9 @@ function Home() {
               tailored resources.
             </p>
             <div className="mt-6 flex gap-4 justify-center md:justify-start">
-              <button className="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700">
+              <Link href={"/auth/login"} className="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700">
                 Get Started
-              </button>
+              </Link>
               <button className="border border-gray-400 px-6 py-3 rounded-lg font-medium text-gray-800 hover:bg-gray-200">
                 Complete Quiz
               </button>
@@ -78,7 +79,7 @@ function Home() {
           </div>
 
           {/* Right Content */}
-          <div className="flex justify-end w-[50%]">
+          <div className="flex justify-end md:w-[50%] w-full md:mt-0 mt-10">
             {/* First Column (takes max space) */}
             <div className="flex-1 flex flex-col justify-between items-end">
               <Card className="w-full max-w-[14rem] rounded-[20px] shadow-md overflow-hidden mb-5 self-end">
@@ -201,7 +202,7 @@ function Home() {
             viewBox="0 0 836 860"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="absolute right-0 bottom-0"
+            className="absolute right-0 bottom-0 "
           >
             <path
               opacity="0.5"
@@ -290,7 +291,7 @@ function Home() {
                 perfect tool for quick revisions and reinforcing your learning,
                 making complex information easy to remember.
               </p>
-              <div className="mt-6 space-y-2">
+              <div className="mt-6 mb-10 space-y-2">
                 <p className="flex items-center gap-2 text-gray-700">
                   <span className="w-3 h-3 bg-purple-600 rounded-full"></span>{" "}
                   1000+ pre-made flashcards
@@ -304,9 +305,9 @@ function Home() {
                   Spaced repetition
                 </p>
               </div>
-              <button className="mt-6 bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700">
+              <Link href={"/auth/login"} className="mt-10 bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700">
                 Get Started
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -324,7 +325,7 @@ function Home() {
                 perfect tool for quick revisions and reinforcing your learning,
                 making complex information easy to remember.
               </p>
-              <div className="mt-6 space-y-2">
+              <div className="mt-6 mb-10 space-y-2">
                 <p className="flex items-center gap-2 text-gray-700">
                   <span className="w-3 h-3 bg-purple-600 rounded-full"></span>{" "}
                   1000+ pre-made flashcards
@@ -338,9 +339,9 @@ function Home() {
                   Spaced repetition
                 </p>
               </div>
-              <button className="mt-6 bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700">
+              <Link href={"/auth/login"} className="mt-6 bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700">
                 Get Started
-              </button>
+              </Link>
             </div>
 
             {/* Left Image Card */}
@@ -545,7 +546,7 @@ function Home() {
                 perfect tool for quick revisions and reinforcing your learning,
                 making complex information easy to remember.
               </p>
-              <div className="mt-6 space-y-2">
+              <div className="mt-6 mb-10 space-y-2">
                 <p className="flex items-center gap-2 text-gray-700">
                   <span className="w-3 h-3 bg-purple-600 rounded-full"></span>{" "}
                   1000+ pre-made flashcards
@@ -559,9 +560,9 @@ function Home() {
                   Spaced repetition
                 </p>
               </div>
-              <button className="mt-6 bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700">
+              <Link href={"/auth/login"} className="mt-6 bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700">
                 Get Started
-              </button>
+              </Link>
             </div>
 
             {/* Left Image Card */}
