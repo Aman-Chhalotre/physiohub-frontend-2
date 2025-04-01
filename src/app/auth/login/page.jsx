@@ -43,7 +43,7 @@ export default function LoginPage() {
     e.preventDefault();
     if (validate()) {
       console.log("Form submitted");  
-      router.push("/user/dashbaord")
+      router.push("/onboarding")
       // Submit form logic
     }
   };
