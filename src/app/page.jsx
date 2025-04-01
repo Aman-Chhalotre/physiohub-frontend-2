@@ -9,6 +9,7 @@ import { FaChartLine, FaFileAlt, FaHeadset, FaStar } from "react-icons/fa";
 import LottiePlayer from "../components/animations/LottiePlayer";
 import run from "../components/animations/data/Happy.json"
 
+
 function Home() {
   const [animated, setAnimated] = useState(false);
   const [percent, setPercent] = useState(0);
