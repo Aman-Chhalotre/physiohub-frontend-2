@@ -383,7 +383,7 @@ export default function Dashboard() {
         <div className='flex flex-col items-center'>
             <div className="flex lg:flex-col lg:gap-4 lg:items-center lg:p-4 lg:pt-0 lg:mt-0 sm:mt-4 md:mt-4">
                 <ProfileCard />
-                <Leaderboard />
+                {/* <Leaderboard /> */}
             </div>
             <div className="flex space-x-4 mt-4">
                 <RecentActivity />

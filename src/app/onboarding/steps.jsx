@@ -44,6 +44,7 @@ export default function Steps({ title, subTitle, data, onNext, isMulti, step }) 
     }
     return <div className="flex p-10 flex-col justify-between flex-grow w-full sm:w-[60%] border">
         <div className="flex flex-col w-full">
+
             <div className="flex justify-center">
                 <div className="flex flex-col justify-center items-center">
                     <ArrowLeft className="text-[#6c4ce6] mr-4 cursor-pointer" size={24} />
@@ -54,6 +55,7 @@ export default function Steps({ title, subTitle, data, onNext, isMulti, step }) 
                     </div>
                 </div>
             </div>
+            
             <div className="flex flex-col mt-10 items-center">
                 <div className="text-center mb-6">
                     <h2 className="text-2xl font-bold text-black">{title}</h2>

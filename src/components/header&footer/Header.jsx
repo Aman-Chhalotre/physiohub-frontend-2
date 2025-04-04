@@ -16,7 +16,7 @@ function Header() {
               <div className="flex items-center">
                 <span className="text-xl font-bold text-gray-800 flex items-center">
                   <Link href={"/"}>
-                    <img className=" w-[160px]" src={"/logo-on-light.png"} />
+                    <img className=" md:w-[160px] w-[130px]" src={"/logo-on-light.png"} />
                   </Link>
                 </span>
               </div>
@@ -39,6 +39,16 @@ function Header() {
 
               {/* Buttons */}
               <div className="hidden md:flex space-x-4">
+                <Link href={"/user/dashboard"}>
+                  <button className="border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
+                    Student
+                  </button>
+                </Link>
+                <Link href={"/teacher/quiz"}>
+                  <button className="border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
+                   Teacher
+                  </button>
+                </Link>
                 <Link href={"/auth/login"}>
                   <button className="border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
                     Login
@@ -65,7 +75,7 @@ function Header() {
           </div>
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="md:hidden bg-white shadow-md p-4 space-y-4">
+            <div className="md:hidden bg-white shadow-md p-4 space-y-4 flex flex-col">
               <a href="#" className="block text-gray-700 hover:text-purple-600">
                 Features
               </a>
@@ -78,6 +88,12 @@ function Header() {
               <a href="#" className="block text-gray-700 hover:text-purple-600">
                 Contact
               </a>
+              <Link href={"/user/dashboard"} className="w-full border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
+                Student
+              </Link>
+              <Link href={"/teacher/quiz"} className="w-full border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
+                Teacher
+              </Link>
               <Link href={"/auth/login"} className="w-full border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
                 Login
               </Link>
