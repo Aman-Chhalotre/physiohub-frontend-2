@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 // import Empty from "@/components/blogs/empty.jsx";
-import Quizs from "../../../components/quiz/Quizs";
-import CreateQuiz from "../../../components/quiz/createQuiz";
+import Quizs from "@/components/quiz/Quizs";
+import CreateQuiz from "@/components/quiz/createQuiz";
 
 
 export default function Quiz() {
