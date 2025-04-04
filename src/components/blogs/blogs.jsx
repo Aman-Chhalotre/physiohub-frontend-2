@@ -38,7 +38,6 @@ export default function Blogs({setShowInBlog}) {
         {articles.map((article, index) => (
           <div key={index} className="border-t pt-4 first:border-t-0 first:pt-0">
             <div className="flex justify-between items-center">
-            <Image src={""}/>
             <div className=" w-[44%]">
             <p className="text-sm text-blue-600 font-medium mb-2">{article.category}</p>
             <h3 className="text-md font-semibold text-gray-900 leading-relaxed">

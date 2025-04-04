@@ -30,7 +30,7 @@ export default function Quizs({setShowInQuiz}) {
             <div className="flex justify-between items-center ">
                 <div className="flex items-center gap-5 w-full">
             <div className="h-[180px] w-[230px]">
-                <Image src={"/auth-activity.png"} height={200} width={240} className="object-cover h-full w-full rounded-2xl"/>
+                <Image src={"/auth-activity.png"} alt="image" height={200} width={240} className="object-cover h-full w-full rounded-2xl"/>
             </div>
             <div className="w-[44%] text-start">
             <p className="text-sm text-blue-600 font-medium mb-2">{article.category}</p>

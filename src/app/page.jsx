@@ -868,6 +868,7 @@ function Home() {
 
           <Image
             src={"/dashboard.png"}
+            alt="image"
             width={1000}
             height={100}
             className="md:w-[90%] w-[99%x] h-full mx-auto"

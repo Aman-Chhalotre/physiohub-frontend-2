@@ -1,6 +1,7 @@
 import React from "react";
 import LottiePlayer from "../animations/LottiePlayer";
 import happy from "../animations/data/Happy.json"
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -47,9 +48,9 @@ const HeroSection = () => {
           tailored resources.
         </p>
         <div className="mt-6 flex md:flex-row flex-col gap-2 justify-center space-x-4">
-          <button className="bg-white text-purple-700 md:px-5 px-2 py-2 rounded-full md:text-base text-xs font-medium shadow-md">
+          <Link href={"/user/dashboard"} className="bg-white text-purple-700 md:px-5 px-2 py-2 rounded-full md:text-base text-xs font-medium shadow-md">
             Get Started
-          </button>
+          </Link>
           <button className="bg-purple-400 text-white md:px-5 px-2 py-2 rounded-full md:text-base text-xs font-medium shadow-md">
             Complete Quiz
           </button>
