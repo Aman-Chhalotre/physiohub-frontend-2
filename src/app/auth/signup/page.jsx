@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
-import { CardContent } from "../../../components/ui/card";
-import { Separator } from "../../../components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { useState } from "react";

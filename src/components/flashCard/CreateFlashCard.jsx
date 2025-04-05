@@ -8,12 +8,12 @@ import {
   Trash2,
   Upload,
 } from "lucide-react";
-import { Select } from "../../components/ui/select.jsx";
-import { Input } from "../../components/ui/input.jsx";
-import { Textarea } from "../../components/ui/textArea.jsx";
-import { Switch } from "../../components/ui/switch.jsx";
-import { Button } from "../../components/ui/button.jsx";
-import PublishFlashCardHeader from "../../components/flashCard/PublishFlashCardHeader.jsx";
+import { Select } from "@/components/ui/select.jsx";
+import { Input } from "@/components/ui/input.jsx";
+import { Textarea } from "@/components/ui/textArea.jsx";
+import { Switch } from "@/components/ui/switch.jsx";
+import { Button } from "@/components/ui/button.jsx";
+import PublishFlashCardHeader from "@/components/flashCard/PublishFlashCardHeader.jsx";
 
 export default function CreateFlashCard() {
   const [cards, setCards] = useState([

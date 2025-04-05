@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "../../components/ui/button.jsx";
+import { Button } from "@/components/ui/button.jsx";
 import { ArrowLeft, Search, Upload } from "lucide-react";
 
 

@@ -8,9 +8,9 @@ import "swiper/css/pagination";
 import { useEffect, useState, useRef } from "react";
 // import { Card, CardContent } from "@/components/ui";
 import { LineChart, Activity } from "lucide-react";
-import { Card, CardContent } from "../../components/ui/card";
-import LottiePlayer from "../../components/animations/LottiePlayer";
-import run from "../../components/animations/data/Like.json"
+import { Card, CardContent } from "@/components/ui/card";
+import LottiePlayer from "@/components/animations/LottiePlayer";
+import run from "@/components/animations/data/Like.json"
 
 const data = [
     { label: "Jan", value: 40 },

@@ -1,7 +1,7 @@
 "use client";
-import Empty from "../../../components/blogs/Empty";
-import Blogs from "../../../components/blogs/Blogs";
-import CreateBlog from "../../../components/blogs/CreateBlog";
+import Empty from "@/components/blogs/Empty";
+import Blogs from "@/components/blogs/Blogs";
+import CreateBlog from "@/components/blogs/CreateBlog";
 import { useState } from "react";
 
 

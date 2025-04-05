@@ -13,7 +13,7 @@ export default function UserLayout({ children }) {
   };
 
   return (
-    <div className="flex max-screen-w max-screen-h w-[100vw] h-[100vh] overflow-hidden">
+    <div className="flex max-screen-w w-[100vw] h-[100vh] overflow-hidden">
       {/* Sidebar */}
       <div
         className={`transition-all duration-500 ease-in-out h-[100vh] sm:block md:block lg:block w-[80px] md:w-[80px] lg:w-[250px] ${
@@ -26,7 +26,7 @@ export default function UserLayout({ children }) {
       {/* Main content */}
       <div className="flex flex-col flex-1 w-[100%]">
         <div className='flex justify-between w-[100%] p-6'>
-            <span className='text-xl font-semibold'>Hello Alaska!</span>
+        <span className='text-xl font-semibold'>Hello Alaska!</span>
             <Menu size={30} className='block sm:block lg:hidden md:hidden' onClick={()=>setSidebarOpen(true)}/>
         </div>
         <div className='flex flex-col w-[100%] overflow-y-auto  p-6 lg:p-4 md:p-6'>

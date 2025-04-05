@@ -1,12 +1,12 @@
 "use client"
 import { useState } from "react";
 import { ChevronDown, ChevronUp, PlusCircle, Trash2, Upload } from "lucide-react";
-import { Select } from "../../components/ui/select.jsx";
-import { Input } from "../../components/ui/input.jsx";
-import { Textarea } from "../../components/ui/textArea.jsx";
-import { Switch } from "../../components/ui/switch.jsx";
-import { Button } from "../../components/ui/button.jsx";
-import PublishQuizHeader from "../../components/quiz/PublishQuizHeader.jsx";
+import { Select } from "@/components/ui/select.jsx";
+import { Input } from "@/components/ui/input.jsx";
+import { Textarea } from "@/components/ui/textArea.jsx";
+import { Switch } from "@/components/ui/switch.jsx";
+import { Button } from "@/components/ui/button.jsx";
+import PublishQuizHeader from "@/components/quiz/PublishQuizHeader.jsx";
 
 export default function CreateQuiz() {
   const [questions, setQuestions] = useState([{ id: 1, options: ["", "", "", ""], open: true }]);

@@ -3,11 +3,12 @@ import { ArrowLeft, Flag } from "lucide-react";
 import { useState, useEffect } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
 import { RxCrossCircled } from "react-icons/rx";
-import run from "../../components/animations/data/Happy.json";
-import cry from "../../components/animations/data/Cry.json";
-import LottiePlayer from "../../components/animations/LottiePlayer";
-import SignInBanner from "../../components/signInBanner/SignInBanner.js";
+import run from "@/components/animations/data/Happy.json";
+import cry from "@/components/animations/data/Cry.json";
+import LottiePlayer from "@/components/animations/LottiePlayer";
+import SignInBanner from "@/components/signInBanner/SignInBanner.js";
 import { IoIosCheckmark } from "react-icons/io";
+import Link from "next/link";
 
 const questions = [
   {
@@ -154,7 +155,11 @@ export default function QuizCard() {
     
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg">
-      <div className="flex justify-center mb-5">
+      <Link href={"/user/dashboard"} className="px-2 py-1 bg-gray-100 flex items-center w-fit rounded-md"><ArrowLeft
+          className="text-gray-600"
+          size={18}
+        /> &nbsp; Go to Dashbaord</Link>
+      <div className="flex justify-center my-5">
         <ArrowLeft
           className="text-gray-600 cursor-pointer"
           size={24}
@@ -183,7 +188,7 @@ export default function QuizCard() {
         <div className="text-gray-700 font-semibold">24 Points ⭐</div>
       </div>
 
-      <div className="my-10">
+      <div className="my-10 relative">
         <h3 className="text-xs border-s-2 border-blue-600 ps-2 mb-3 text-gray-400 uppercase font-semibold">
           Question {currentQuestion + 1} of {questions.length} • Chapter Anatomy
         </h3>
@@ -207,7 +212,7 @@ export default function QuizCard() {
           </div>
         )}
 
-        <div className="mt-8 mb-10 space-y-2">
+        <div className="mt-8 mb-10 space-y-2 ">
           {questions[currentQuestion].type == "chooseTheCorrect" &&
             questions[currentQuestion].options.map((option) => {
               let borderColor = "border-gray-300";
@@ -328,8 +333,8 @@ export default function QuizCard() {
         {isAnswered && (
           <div
             className={`flex items-center ${
-              isCorrect ? "flex-row left-[40%]" : "flex-row-reverse left-[35%]"
-            } gap-5 absolute   -translate-y-35  justify-self-center`}
+              isCorrect ? "flex-row left-[25%] bottom-[-10%]" : "flex-row-reverse left-[8%] bottom-[-10%]"
+            } gap-5 absolute justify-self-center`}
           >
             <div className="mt-4 p-3 border rounded-lg bg-white shadow-md space-x-3 max-w-[300px]">
               <span

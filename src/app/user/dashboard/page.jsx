@@ -7,8 +7,8 @@ import { RiCalendarLine } from 'react-icons/ri';
 import { ChevronDown } from 'lucide-react';
 import { FaTrophy, FaArrowRight } from 'react-icons/fa'; // Trophy icon for Rank
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'; // Up and Down arrows
-import LottiePlayer from "../../../components/animations/LottiePlayer";
-import run from "../../../components/animations/data/Hi.json"
+import LottiePlayer from "@/components/animations/LottiePlayer";
+import run from "@/components/animations/data/Hi.json"
 
 const RecentActivity = () => {
     const activities = [

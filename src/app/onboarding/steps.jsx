@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from "../../components/ui/button.jsx";
+import { Button } from "@/components/ui/button.jsx";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
 
