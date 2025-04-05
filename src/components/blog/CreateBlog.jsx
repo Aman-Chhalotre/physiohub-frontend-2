@@ -2,7 +2,7 @@ import { Input } from "../ui/input.jsx";
 import { Textarea } from "../ui/textArea.jsx";
 import { Select, SelectItem } from "../ui/select.jsx";
 import { Upload } from "lucide-react";
-import PublishBlogHeader from "./PublishBlogHeader"
+import PublishBlogHeader from "./PublishBlogHeader.jsx"
 
 export default function CreateBlog() {
   return (
