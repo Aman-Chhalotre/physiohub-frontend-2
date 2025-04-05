@@ -7,8 +7,8 @@ import { RiCalendarLine } from 'react-icons/ri';
 import { ChevronDown } from 'lucide-react';
 import { FaTrophy, FaArrowRight } from 'react-icons/fa'; // Trophy icon for Rank
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'; // Up and Down arrows
-import LottiePlayer from "../../../components/animations/LottiePlayer";
-import run from "../../../components/animations/data/Hi.json"
+import LottiePlayer from "@/components/animations/LottiePlayer";
+import run from "@/components/animations/data/Hi.json"
 
 const RecentActivity = () => {
     const activities = [
@@ -383,7 +383,7 @@ export default function Dashboard() {
         <div className='flex flex-col items-center'>
             <div className="flex lg:flex-col lg:gap-4 lg:items-center lg:p-4 lg:pt-0 lg:mt-0 sm:mt-4 md:mt-4">
                 <ProfileCard />
-                <Leaderboard />
+                {/* <Leaderboard /> */}
             </div>
             <div className="flex space-x-4 mt-4">
                 <RecentActivity />

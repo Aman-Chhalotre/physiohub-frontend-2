@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from "../../components/ui/button.jsx";
+import { Button } from "@/components/ui/button.jsx";
 import "./onboarding.css";
-import LottiePlayer from "../../components/animations/LottiePlayer";
-import run from "../../components/animations/data/Hi.json"
+import LottiePlayer from "@/components/animations/LottiePlayer";
+import run from "@/components/animations/data/Hi.json"
 import Link from "next/link";
 
 export default function StartEnd({isEnd,onClick}) {

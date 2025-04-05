@@ -1,8 +1,9 @@
 'use client'
 
-import { Home, User, FileText, Compass, ChevronDown, X } from "lucide-react";
+import { LayoutGrid, MessageSquareText, FileText, BookCopy, ChevronDown, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
+import { Trash2, Edit, Sparkles } from "lucide-react";
 
 
 const Sidebar = ({onClose}) => {
@@ -10,11 +11,7 @@ const Sidebar = ({onClose}) => {
     const pathname = usePathname()
 
     const handleSelect = (item) => {
-        if(item === "quiz"){
-            router.push(`/${item}`)
-            return
-        }
-        router.push('/user/'+item)
+        router.push('/teacher/'+item)
     };
 
     return (
@@ -40,35 +37,27 @@ const Sidebar = ({onClose}) => {
 
                 <div className="mt-10 pl-5 pr-5">
                     <button
-                        onClick={() => handleSelect('dashboard')}
-                        className={`mb-4 flex items-center lg:space-x-2 md:space-x-0 space-x-2 cursor-pointer text-sm font-semibold p-4 rounded-lg w-full ${pathname === '/user/dashboard' ? 'bg-[#F6F9FC] text-[#7240FD]' : 'hover:bg-[#F6F9FC] hover:text-[#7240FD] text-[#687494]'}`}
-                    >
-                        <Home size={24} /> {/* Increased size for the icon */}
-                        <span className="md:hidden lg:block">My Dashboard</span>
-                    </button>
-
-                    <button
-                        onClick={() => handleSelect('discover')}
-                        className={`mb-4 flex items-center lg:space-x-2 md:space-x-0 space-x-2 text-sm cursor-pointer font-semibold p-4 rounded-lg w-full ${pathname === '/user/discover' ? 'bg-[#F6F9FC] text-[#7240FD]' : 'hover:bg-[#F6F9FC] hover:text-[#7240FD] text-[#687494]'}`}
-                    >
-                        <Compass size={24} /> {/* Increased size for the icon */}
-                        <span className="md:hidden lg:block">Discover</span>
-                    </button>
-
-                    <button
-                        onClick={() => handleSelect('profile')}
-                        className={`mb-4 flex items-center md:space-x-0 lg:space-x-2 space-x-2 text-sm cursor-pointer font-semibold p-4 rounded-lg w-full ${pathname === '/user/profile' ? 'bg-[#F6F9FC] text-[#7240FD]' : 'hover:bg-[#F6F9FC] hover:text-[#7240FD] text-[#687494]'}`}
-                    >
-                        <User size={24} /> {/* Increased size for the icon */}
-                        <span className="md:hidden lg:block">Profile</span>
-                    </button>
-
-                    <button
-                        onClick={() => handleSelect("quiz")}
-                        className={`mb-4 flex items-center md:space-x-0 lg:space-x-2 space-x-2 text-sm cursor-pointer font-semibold p-4 rounded-lg w-full ${pathname === '/quiz' ? 'bg-[#F6F9FC] text-[#7240FD]' : 'hover:bg-[#F6F9FC] hover:text-[#7240FD] text-[#687494]'}`}
+                        onClick={() => handleSelect('blogs')}
+                        className={`mb-4 flex items-center lg:space-x-2 md:space-x-0 space-x-2 cursor-pointer text-sm font-semibold p-4 rounded-lg w-full ${pathname === '/teacher/blogs' ? 'bg-[#F6F9FC] text-[#7240FD]' : 'hover:bg-[#F6F9FC] hover:text-[#7240FD] text-[#687494]'}`}
                     >
                         <FileText size={24} /> {/* Increased size for the icon */}
-                        <span className="md:hidden lg:block">Mock Test</span>
+                        <span className="md:hidden lg:block">Blogs</span>
+                    </button>
+
+                    <button
+                        onClick={() => handleSelect('quiz')}
+                        className={`mb-4 flex items-center md:space-x-0 lg:space-x-2 space-x-2 text-sm cursor-pointer font-semibold p-4 rounded-lg w-full ${pathname === '/teacher/quiz' ? 'bg-[#F6F9FC] text-[#7240FD]' : 'hover:bg-[#F6F9FC] hover:text-[#7240FD] text-[#687494]'}`}
+                    >
+                        <MessageSquareText size={24} /> {/* Increased size for the icon */}
+                        <span className="md:hidden lg:block">Quiz</span>
+                    </button>
+
+                    <button
+                        onClick={() => handleSelect('flashCard')}
+                        className={`mb-4 flex items-center md:space-x-0 lg:space-x-2 space-x-2 text-sm cursor-pointer font-semibold p-4 rounded-lg w-full ${pathname === '/teacher/flashCard' ? 'bg-[#F6F9FC] text-[#7240FD]' : 'hover:bg-[#F6F9FC] hover:text-[#7240FD] text-[#687494]'}`}
+                    >
+                        <BookCopy size={24} /> {/* Increased size for the icon */}
+                        <span className="md:hidden lg:block">Flash cards</span>
                     </button>
                 </div>
 
