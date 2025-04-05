@@ -2,7 +2,7 @@
 import Image from "next/image.js";
 import { Button } from "../ui/button.jsx";
 import { Trash2, Edit, Sparkles } from "lucide-react";
-import BlogHeader from "./BlogHeader.jsx"
+import BlogHeader from "./BlogHeader"
 
 const articles = [
   {

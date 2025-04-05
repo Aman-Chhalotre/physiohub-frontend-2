@@ -2,7 +2,7 @@
 import Image from "next/image.js";
 import { Button } from "@/components/ui/button.jsx";
 import { Trash2, Edit, Sparkles, MessageSquareText, Clock } from "lucide-react";
-import FlashCardHeader from "@/components/flashCard/flashCardHeader.jsx"
+import FlashCardHeader from "@/components/flashCard/FlashCardHeader"
 
 const articles = [
   {

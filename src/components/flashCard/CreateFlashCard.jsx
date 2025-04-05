@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input.jsx";
 import { Textarea } from "@/components/ui/textArea.jsx";
 import { Switch } from "@/components/ui/switch.jsx";
 import { Button } from "@/components/ui/button.jsx";
-import PublishFlashCardHeader from "@/components/flashCard/PublishFlashCardHeader.jsx";
+import PublishFlashCardHeader from "@/components/flashCard/PublishFlashCardHeader";
 
 export default function CreateFlashCard() {
   const [cards, setCards] = useState([
