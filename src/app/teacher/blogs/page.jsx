@@ -1,5 +1,5 @@
 "use client";
-import Empty from "@/components/blogs/Empty";
+// import Empty from "@/components/blogs/Empty";
 import Blogs from "@/components/blogs/Blogs";
 import CreateBlog from "@/components/blogs/CreateBlog";
 import { useState } from "react";
@@ -12,7 +12,7 @@ export default function TeacherDashboard() {
       <div className="flex flex-col md:flex-col sm:flex-col lg:flex-row">
         <div className="w-full">
           <div className="flex flex-col items-center justify-center min-h-[80vh]">
-            {showInBlog == "Empty"&&<Empty setShowInBlog={setShowInBlog}/>}
+            {/* {showInBlog == "Empty"&&<Empty setShowInBlog={setShowInBlog}/>} */}
             {showInBlog == "Blogs" &&<Blogs setShowInBlog={setShowInBlog}/>}
             {showInBlog == "CreateBlog"&&<CreateBlog setShowInBlog={setShowInBlog}/>}  
           </div>
