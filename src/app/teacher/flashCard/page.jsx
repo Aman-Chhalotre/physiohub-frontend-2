@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import FlashCards from "@/components/flashCard/FlashCards.jsx";
-import CreateFlashCard from "@/components/flashCard/CreateFlashCard.jsx"
+import FlashCards from "@/components/flashCard/FlashCards";
+import CreateFlashCard from "@/components/flashCard/CreateFlashCard"
 
 
 export default function FlashCard() {
