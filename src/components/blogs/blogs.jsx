@@ -1,8 +1,8 @@
 "use client"
 import Image from "next/image.js";
-import { Button } from "../../components/ui/button.jsx";
+import { Button } from "../ui/button.jsx";
 import { Trash2, Edit, Sparkles } from "lucide-react";
-import BlogHeader from "../../components/blogs/BlogHeader.jsx"
+import BlogHeader from "./BlogHeader.jsx"
 
 const articles = [
   {

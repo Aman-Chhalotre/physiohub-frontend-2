@@ -1,8 +1,8 @@
 "use client"
 import Image from "next/image.js";
 import { Button } from "../../components/ui/button.jsx";
-import { Trash2, Edit, Sparkles, MessageSquareText, Clock } from "lucide-react";
-import QuizHeader from "../../components/quiz/QuizHeader.jsx"
+import { Trash2, Edit, MessageSquareText, Clock } from "lucide-react";
+import QuizHeader from "../../components/quiz/QuizHeader"
 
 const articles = [
   {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { FileText } from "lucide-react";
-import BlogHeader from "../../components/blogs/BlogHeader.jsx"
+import BlogHeader from "./BlogHeader.jsx"
 
 function Empty({setShowInBlog}) {
   return (

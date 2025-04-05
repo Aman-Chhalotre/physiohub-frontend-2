@@ -1,9 +1,5 @@
 "use client";
 import { Button } from "../../components/ui/button.jsx";
-import {
-  Select,
-  SelectItem,
-} from "../../components/ui/select";
 import { ArrowLeft, Search, Upload } from "lucide-react";
 
 
