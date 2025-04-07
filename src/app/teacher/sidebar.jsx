@@ -1,9 +1,8 @@
 'use client'
 
-import { LayoutGrid, MessageSquareText, FileText, BookCopy, ChevronDown, X } from "lucide-react";
+import { LayoutGrid, MessageSquareText, FileText, BookCopy, ChevronDown, X, Settings } from "lucide-react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { Trash2, Edit, Sparkles } from "lucide-react";
 
 
 const Sidebar = ({onClose}) => {
@@ -58,6 +57,13 @@ const Sidebar = ({onClose}) => {
                     >
                         <BookCopy size={24} /> {/* Increased size for the icon */}
                         <span className="md:hidden lg:block">Flash cards</span>
+                    </button>
+                    <button
+                        onClick={() => handleSelect('settings')}
+                        className={`mb-4 flex items-center md:space-x-0 lg:space-x-2 space-x-2 text-sm cursor-pointer font-semibold p-4 rounded-lg w-full ${pathname === '/teacher/settings' ? 'bg-[#F6F9FC] text-[#7240FD]' : 'hover:bg-[#F6F9FC] hover:text-[#7240FD] text-[#687494]'}`}
+                    >
+                        <Settings size={24} /> {/* Increased size for the icon */}
+                        <span className="md:hidden lg:block">Settings</span>
                     </button>
                 </div>
 

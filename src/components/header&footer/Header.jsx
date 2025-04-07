@@ -3,9 +3,12 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import logo from "../../../public/logo-on-light.png";
+import { IoMdPerson } from "react-icons/io";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
   return (
     <>
       <div>
@@ -38,7 +41,7 @@ function Header() {
               </div>
 
               {/* Buttons */}
-              <div className="hidden md:flex space-x-4">
+              <div className="hidden md:flex space-x-4 items-center">
                 <Link href={"/user/dashboard"}>
                   <button className="border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
                     Student
@@ -49,7 +52,15 @@ function Header() {
                    Teacher
                   </button>
                 </Link>
-                <Link href={"/auth/login"}>
+                {isLoggedIn?(
+                  <>
+                  <Link href={"/user/dashboard"}>
+                  <IoMdPerson className="text-purple-600 text-3xl"/>
+                  </Link>
+                  </>
+                ):(
+                  <>
+                    <Link href={"/auth/login"}>
                   <button className="border border-purple-600 text-purple-600 px-4 py-2 rounded-lg hover:bg-purple-100">
                     Login
                   </button>
@@ -60,6 +71,8 @@ function Header() {
                 >
                   Sign In
                 </Link>
+                  </>
+                )}
               </div>
 
               {/* Mobile Menu Button */}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function Switch({ checked = false, onChange }) {
+export function Switch({ checked = false, onChange, w = "w-14" }) {
   const [isOn, setIsOn] = useState(checked);
 
   const toggleSwitch = () => {
@@ -13,7 +13,7 @@ export function Switch({ checked = false, onChange }) {
   return (
     <button
       onClick={toggleSwitch}
-      className={`relative w-14 h-6 flex items-center rounded-full p-1 transition-colors ${
+      className={`relative ${w} h-6 flex items-center rounded-full p-1 transition-colors ${
         isOn ? "bg-purple-600" : "bg-gray-300"
       }`}
     >
