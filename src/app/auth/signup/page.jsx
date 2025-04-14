@@ -1,72 +1,71 @@
-'use client'
+'use client';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from "../../../components/ui/button";
+import { Input } from "../../../components/ui/input";
+import { CardContent } from "../../../components/ui/card";
+import { Separator } from "../../../components/ui/separator";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from 'lucide-react';
+import axios from 'axios';
 
 export default function SignUpPage() {
-
   const router = useRouter();
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  
-  const [errors, setErrors] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    mobile: '',
+    password: '',
   });
 
-  const handleSubmit = (e) => {
+  const [formErrors, setFormErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [responseMessage, setResponseMessage] = useState({ type: '', text: '' });
+
+  const handleChange = (field) => (e) => {
+    setFormData(prev => ({ ...prev, [field]: e.target.value }));
+    setFormErrors(prev => ({ ...prev, [field]: '' }));
+    setResponseMessage({ type: '', text: '' });
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.name.trim()) errors.name = "Full Name is required.";
+    if (!formData.email.trim()) errors.email = "Email is required.";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = "Enter a valid email.";
+
+    if (!formData.mobile.trim()) errors.mobile = "Mobile number is required.";
+    else if (!/^\d{10}$/.test(formData.mobile)) errors.mobile = "Enter a valid 10-digit mobile number.";
+
+    if (!formData.password) errors.password = "Password is required.";
+    else if (formData.password.length < 6) errors.password = "Password must be at least 6 characters.";
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
-    const newErrors = {
-      fullName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    };
+    setLoading(true);
+    try {
+      const res = await axios.post('http://45.94.31.205/api/v1/auth/register', formData);
 
-    // Validate Full Name
-    if (!fullName) {
-      newErrors.fullName = "Full Name is required.";
-    }
+      setResponseMessage({ type: 'success', text: res?.data?.message || 'Registration successful!' });
 
-    // Validate Email
-    if (!email) {
-      newErrors.email = "Email is required.";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "Please enter a valid email address.";
-    }
-
-    // Validate Password
-    if (!password) {
-      newErrors.password = "Password is required.";
-    } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters.";
-    }
-
-    // Validate Confirm Password
-    if (!confirmPassword) {
-      newErrors.confirmPassword = "Confirm Password is required.";
-    } else if (confirmPassword !== password) {
-      newErrors.confirmPassword = "Passwords do not match.";
-    }
-
-    setErrors(newErrors);
-
-    // If there are no errors, submit the form
-    if (Object.values(newErrors).every((err) => err === "")) {
-      console.log("Form submitted");
-      router.push('/onboarding')
-      // Perform form submission logic here
+      // Redirect to onboarding after a short delay
+      setTimeout(() => router.push('/onboarding'), 1500);
+    } catch (error) {
+      const errorMsg =
+        error.response?.data?.message || "Registration failed. Please try again.";
+      setResponseMessage({ type: 'error', text: errorMsg });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,79 +74,91 @@ export default function SignUpPage() {
       <img className="md:flex lg:hidden hidden w-[160px] mb-10" src={'/logo-on-light.png'} />
       <h2 className="text-xl font-bold text-gray-900 mb-4">Sign up</h2>
       <p className="text-sm text-gray-500 mb-4">Join our community and start your learning journey today!</p>
+
       <form onSubmit={handleSubmit} className="space-y-4">
-        
-        {/* Full Name Field */}
+
+        {/* Full Name */}
         <div>
           <label className="text-sm font-medium text-gray-700">Full Name</label>
           <Input
-            placeholder="Enter your full name"
-            type="text"
-            className={`mt-1 ${errors.fullName ? 'border-red-500' : ''}`}
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            placeholder="Enter your full Name"
+            value={formData.name}
+            onChange={handleChange('name')}
+            className={`mt-1 ${formErrors.name ? 'border-red-500' : ''}`}
           />
-          {errors.fullName && <p className="text-sm text-red-500">{errors.fullName}</p>}
+          {formErrors.name && <p className="text-sm text-red-500">{formErrors.name}</p>}
         </div>
 
-        {/* Email Address Field */}
+        {/* Email */}
         <div>
           <label className="text-sm font-medium text-gray-700">Email Address</label>
           <Input
             placeholder="Enter your email"
             type="email"
-            className={`mt-1 ${errors.email ? 'border-red-500' : ''}`}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleChange('email')}
+            className={`mt-1 ${formErrors.email ? 'border-red-500' : ''}`}
           />
-          {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+          {formErrors.email && <p className="text-sm text-red-500">{formErrors.email}</p>}
         </div>
 
-        {/* Password Field */}
+        {/* Mobile */}
         <div>
+          <label className="text-sm font-medium text-gray-700">Mobile Number</label>
+          <Input
+            placeholder="Enter your mobile number"
+            type="tel"
+            value={formData.mobile}
+            onChange={handleChange('mobile')}
+            className={`mt-1 ${formErrors.mobile ? 'border-red-500' : ''}`}
+            maxLength={10}
+          />
+          {formErrors.mobile && <p className="text-sm text-red-500">{formErrors.mobile}</p>}
+        </div>
+
+        {/* Password */}
+        <div className="relative">
           <label className="text-sm font-medium text-gray-700">Password</label>
           <Input
             placeholder="Enter your password"
-            type="password"
-            className={`mt-1 ${errors.password ? 'border-red-500' : ''}`}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            type={showPassword ? 'text' : 'password'}
+            value={formData.password}
+            onChange={handleChange('password')}
+            className={`mt-1 pr-10 ${formErrors.password ? 'border-red-500' : ''}`}
           />
-          {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
+          <span
+            className="absolute right-3 top-[38px] cursor-pointer text-gray-500"
+            onClick={() => setShowPassword(prev => !prev)}
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </span>
+          {formErrors.password && <p className="text-sm text-red-500">{formErrors.password}</p>}
         </div>
 
-        {/* Confirm Password Field */}
-        <div>
-          <label className="text-sm font-medium text-gray-700">Confirm Password</label>
-          <Input
-            placeholder="Confirm your password"
-            type="password"
-            className={`mt-1 ${errors.confirmPassword ? 'border-red-500' : ''}`}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-          {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword}</p>}
-        </div>
+        {/* Response Message */}
+        {responseMessage.text && (
+          <p className={`text-sm text-center ${responseMessage.type === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+            {responseMessage.text}
+          </p>
+        )}
 
-        {/* Forgot Password Link */}
-        <div className="text-right text-sm text-blue-600 cursor-pointer">Forgot password?</div>
-
-        {/* Create Account Button */}
-        <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white">
-          Create Account
+        {/* Submit */}
+        <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white" disabled={loading}>
+          {loading ? "Creating Account..." : "Create Account"}
         </Button>
 
-        {/* Google Button */}
         <Separator className="my-2" />
+
+        {/* Google */}
         <Button variant="outline" className="w-full flex items-center justify-center gap-2">
           <FcGoogle className="text-lg" /> Continue with Google
         </Button>
       </form>
 
-      {/* Login Link */}
+      {/* Login link */}
       <p className="text-sm text-center text-gray-600 mt-4">
-        Don&apos;t have an account yet?{" "}
-        <Link href={'/auth/login'}>
+        Already have an account?{" "}
+        <Link href="/auth/login">
           <span className="text-blue-600 cursor-pointer">Login</span>
         </Link>
       </p>
