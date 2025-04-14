@@ -25,24 +25,40 @@ const LevelCard = ({ title, subTitle, icon, isSelected, onClick }) => {
 };
 
 
-export default function Steps({ title, subTitle, data, onNext, isMulti, step }) {
-    const [selected,setSelected ] = useState([]);
+export default function Steps({ title, subTitle, data, onNext, isMulti, step, formData, setFormData }) {
+
+    const [selected, setSelected] = useState([]);
     const handleStepData = (value) => {
-        setSelected((prev)=>{
-            prev = [...prev]
-            if(isMulti){
-                if(prev.includes(value)){
-                    prev.splice(prev.indexOf(value))
-                }else{
-                    prev.push(value)
-                }
-            }else{
-                prev = [value]
+        setSelected((prev) => {
+          let updated = [...prev];
+          if (isMulti) {
+            if (updated.includes(value)) {
+              updated = updated.filter((item) => item !== value);
+            } else {
+              updated.push(value);
             }
-            return prev
-        })
-    }
-    return <div className="flex p-10 flex-col justify-between flex-grow w-full sm:w-[60%] border">
+          } else {
+            updated = [value];
+          }
+      
+          // Update central formData
+          const keys = ["level", "pace", "interestAreas", "goals", "notification"];
+          setFormData({ ...formData, [keys[step - 1]]: isMulti ? updated : updated[0] });
+      
+          return updated;
+        });
+      };
+      
+
+    const handleNext = () => {
+        // handleData(fieldKey, isMulti ? selected : selected[0]);
+        if (selected.length === 0) return;
+        onNext(step + 1);
+    };
+
+    return (
+        <div className="flex p-10 flex-col justify-between flex-grow w-full sm:w-[60%] border">
+            {/* ...your existing JSX remains same... */}
         <div className="flex flex-col w-full">
 
             <div className="flex justify-center">
@@ -98,20 +114,21 @@ export default function Steps({ title, subTitle, data, onNext, isMulti, step }) 
             </div>
         </div>
         <div className="flex justify-between">
-            <Button
-                variant="outline"
-                onClick={() => { }}
-                className="px-6 py-3 text-sm font-semibold text-[#6c4ce6] border-[#6c4ce6] rounded-sm hover:bg-[#6c4ce6] hover:text-white transition-all duration-200"
-            >
-                I’ll do this later
-            </Button>
-            <Button
-                onClick={()=>onNext(step+1)}
-                variant="ghost"
-                className="px-8 py-3 text-white bg-[#6c4ce6] rounded-sm"
-            >
-                Next
-            </Button>
+                <Button
+                    variant="outline"
+                    onClick={() => {}}
+                    className="px-6 py-3 text-sm font-semibold text-[#6c4ce6] border-[#6c4ce6] rounded-sm hover:bg-[#6c4ce6] hover:text-white transition-all duration-200"
+                >
+                    I’ll do this later
+                </Button>
+                <Button
+                    onClick={handleNext}
+                    variant="ghost"
+                    className="px-8 py-3 text-white bg-[#6c4ce6] rounded-sm"
+                >
+                    Next
+                </Button>
+            </div>
         </div>
-    </div>
+    );
 }
