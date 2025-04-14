@@ -87,7 +87,7 @@ export default function QuizCard() {
   const [isAnswered, setIsAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [timeLeft, setTimeLeft] = useState(150);
-  const [isSubmited, setIsSubmited] = useState(false);
+  const [isSubmited, setIsSubmited] = useState(true);
 
   useEffect(() => {
     if (timeLeft <= 0) return;
