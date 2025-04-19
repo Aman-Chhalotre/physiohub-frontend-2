@@ -10,14 +10,15 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { Eye, EyeOff } from 'lucide-react';
 import axios from 'axios';
-
+import usePost from '@/hooks/usePost';
+const api_url = process.env.NEXT_PUBLIC_API_BASE_URL
 export default function SignUpPage() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    mobile: '',
+    mobileNumber: '',
     password: '',
   });
 
@@ -38,8 +39,8 @@ export default function SignUpPage() {
     if (!formData.email.trim()) errors.email = "Email is required.";
     else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = "Enter a valid email.";
 
-    if (!formData.mobile.trim()) errors.mobile = "Mobile number is required.";
-    else if (!/^\d{10}$/.test(formData.mobile)) errors.mobile = "Enter a valid 10-digit mobile number.";
+    if (!formData.mobileNumber.trim()) errors.mobileNumber = "Mobile number is required.";
+    else if (!/^\d{10}$/.test(formData.mobileNumber)) errors.mobileNumber = "Enter a valid 10-digit mobile number.";
 
     if (!formData.password) errors.password = "Password is required.";
     else if (formData.password.length < 6) errors.password = "Password must be at least 6 characters.";
@@ -51,15 +52,20 @@ export default function SignUpPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-
+    console.log('EMAIL:', formData.email, typeof formData.email);
     setLoading(true);
     try {
-      const res = await axios.post('http://45.94.31.205/api/v1/auth/register', formData);
+      const res = await axios.post(`${api_url}/auth/register`, formData);
 
       setResponseMessage({ type: 'success', text: res?.data?.message || 'Registration successful!' });
 
+      const {data, error, status} = await usePost(`/auth/send-email-otp`, {"email": formData.email})
+      if(data){
+        localStorage.setItem("otptype" , "varify")
+        router.push("/auth/verify-otp")
+      }
       // Redirect to onboarding after a short delay
-      setTimeout(() => router.push('/onboarding'), 1500);
+      // setTimeout(() => router.push('/onboarding'), 1500);
     } catch (error) {
       const errorMsg =
         error.response?.data?.message || "Registration failed. Please try again.";
@@ -108,12 +114,12 @@ export default function SignUpPage() {
           <Input
             placeholder="Enter your mobile number"
             type="tel"
-            value={formData.mobile}
-            onChange={handleChange('mobile')}
-            className={`mt-1 ${formErrors.mobile ? 'border-red-500' : ''}`}
+            value={formData.mobileNumber}
+            onChange={handleChange('mobileNumber')}
+            className={`mt-1 ${formErrors.mobileNumber ? 'border-red-500' : ''}`}
             maxLength={10}
           />
-          {formErrors.mobile && <p className="text-sm text-red-500">{formErrors.mobile}</p>}
+          {formErrors.mobileNumber && <p className="text-sm text-red-500">{formErrors.mobileNumber}</p>}
         </div>
 
         {/* Password */}

@@ -6,18 +6,29 @@ import { CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import usePost from "@/hooks/usePost";
 
 export default function LoginPage() {
+  const [firstVisit, setFirstVisit] = useState(true)
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+ const handleForgotClick = () => {
+  localStorage.setItem("otptype" , "forgot")
+  router.push("/auth/verify-email")
+ }
+
+  useEffect(()=>{
+    localStorage.removeItem("accessToken")
+  },[])
 
   const validate = () => {
     const newErrors = {};
@@ -67,6 +78,7 @@ export default function LoginPage() {
     } finally {
       setLoading(false);
     }
+
   };
 
   return (
@@ -115,7 +127,7 @@ export default function LoginPage() {
         </div>
 
         {/* Forgot Password */}
-        <div className="text-right text-sm text-blue-600 cursor-pointer">Forgot password?</div>
+        <div className="text-right text-sm text-blue-600 cursor-pointer" onClick={handleForgotClick}>Forgot password?</div>
 
         {/* Submit */}
         <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white" disabled={loading}>

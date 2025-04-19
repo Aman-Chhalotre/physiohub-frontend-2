@@ -1,10 +1,12 @@
 "use client";
+import usePost from "@/hooks/usePost";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ResetPassword() {
+  const [otp, setOtp] = useState("")
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [show, setShow] = useState(false);
@@ -21,10 +23,9 @@ export default function ResetPassword() {
 
   const router = useRouter();
 
-//   useEffect(() => {
-//     const email = user.email;
-//     setEmail(email);
-//   }, []);
+  useEffect(() => {
+    setOtp(localStorage.getItem("otp"))
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -54,7 +55,7 @@ export default function ResetPassword() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
@@ -62,7 +63,10 @@ export default function ResetPassword() {
       return;
     }
     setPasswordMatch(true);
-
+    const {data, error , status} = await usePost(`/auth/reset-password`, {otp, password : newPassword})
+    if(data){
+      router.push("/auth/login")
+    }
   };
 
 

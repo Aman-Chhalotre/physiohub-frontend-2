@@ -1,5 +1,6 @@
 "use client";
 
+import usePost from "@/hooks/usePost";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -18,7 +19,9 @@ function VerifyOTP() {
   const router = useRouter();
   const inputRef = useRef(null);
 
-
+  useEffect(()=>{
+    setOt(localStorage.getItem("otptype"))
+  },[])
 
   useEffect(()=>{
    
@@ -31,23 +34,9 @@ function VerifyOTP() {
 
 
   const handleResendOtp = () => {
-      
-    
     
     setIsResendEnabled(false);
-    mutation2.mutate(
-      { email: email, otp_type: ot },
-      {
-        onSuccess: (details) => {
-          setResendOtp(true)
-          setTimeLeft(180);
-        },
-        onError: (error) => {
-          console.log(`error during generating otp :`, error);
-
-        },
-      }
-    );
+    const {} = usePost(`/auth/reset-password`)
   };
 
   useEffect(() => {
@@ -84,28 +73,21 @@ function VerifyOTP() {
     }
   };
 
-  const handleOtpSubmit = (e) =>{
+  const handleOtpSubmit = async (e) =>{
     e.preventDefault();
     
     const otp_number = otp.join("");
-    mutation.mutate({email : email , otp_number , otp_type: ot},
-      {
-        onSuccess : (details)=>{
-          console.log("otp verification successfull", details);
-          if(ot === "forgot"){
-            router.push("/create-new-password")
-          } else if("varification"){
-            router.push("/login")
-          }
-        },
-        onError: (error)=>{
-          console.error("Error creating user", error)
-          if(error.response.data.status == "Failed"){
-            setError("Invalid OTP")
-          }
-        }
+    if(ot === "varify"){
+      const {data, error, status} = await usePost(`/auth/verify-otp`, {otp: otp_number})
+      if(data){
+        router.push("/auth/login")
       }
-    )
+    } 
+    if(ot === "forgot"){
+      localStorage.setItem("otp" , otp_number)
+      router.push("/auth/reset-password")
+    }
+   
   }
 
   return (

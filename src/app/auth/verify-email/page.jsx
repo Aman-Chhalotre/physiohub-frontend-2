@@ -1,5 +1,6 @@
 "use client";
 
+import usePost from "@/hooks/usePost";
 import { Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,13 +10,6 @@ import { useEffect, useState } from "react";
 export default function VerifyEmail() {
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState("");
-
-  const [state, setState] = useState({
-    open: false,
-    vertical: "top",
-    horizontal: "center",
-  });
-
   const router = useRouter();
 
   const handleInputChange = (e) => {
@@ -26,29 +20,16 @@ export default function VerifyEmail() {
     setIsValid(emailRegex.test(newEmail)); // Update validation state
   };
 
-  const handleVerify = (e) => {
+  const handleVerify = async(e) => {
     e.preventDefault();
-    sessionStorage.setItem("e", email);
-    mutation.mutate(
-      { email, otp_type: "forgot" },
-      {
-        onSuccess: (details) => {
-          sessionStorage.setItem("ot", "forgot");
-          setState({ ...state, open: true });
-          setTimeout(() => {
-            router.push("/verification/verify-otp");
-          }, 2000);
-        },
-        onError: (error) => {
-          console.log(`error in email varification : ${error}`);
-        },
+    console.log(email)
+      const {data, error, status} = await usePost(`/auth/forgot-password`, {"email" : email} )
+      if(data){
+        console.log(data)
+        router.push(`/auth/verify-otp`)
       }
-    );
   };
 
-  const handleClose = () => {
-    setState({ ...state, open: false });
-  };
 
   return (
     <>
