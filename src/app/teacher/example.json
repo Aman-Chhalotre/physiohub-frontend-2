@@ -1,0 +1,43 @@
+quize jab create kr rahe hai to usme apne ko timing lena hai 
+or perticular ans ka description lena hai 
+{
+  "title": "Image-Based Quiz",
+  "startTime": "2024-10-21T10:00:00Z",
+  "endTime": "2024-10-21T12:00:00Z",
+  "status": "published",
+  "questions": [
+    {
+      "question": "Identify this historical monument?",
+      "image": "https://example.com/images/taj-mahal.jpg",
+      "type": "radio",
+      "options": [
+        { "type": "text", "value": "Taj Mahal", "correctAnswer": true },
+        { "type": "text", "value": "Eiffel Tower", "correctAnswer": false },
+        { "type": "text", "value": "Statue of Liberty", "correctAnswer": false }
+      ],
+      "description": "Select the correct name for this monument."
+    },
+    {
+      "question": "Which animal is shown in the image?",
+      "image": "https://example.com/images/lion.jpg",
+      "type": "radio",
+      "options": [
+        { "type": "text", "value": "Lion", "correctAnswer": true },
+        { "type": "text", "value": "Tiger", "correctAnswer": false },
+        { "type": "text", "value": "Cheetah", "correctAnswer": false }
+      ],
+      "description": "Choose the correct name of the animal."
+    },
+    {
+      "question": "Select the correct country for this flag.",
+      "image": "https://example.com/images/flag-india.jpg",
+      "type": "radio",
+      "options": [
+        { "type": "text", "value": "USA", "correctAnswer": false },
+        { "type": "text", "value": "India", "correctAnswer": true },
+        { "type": "text", "value": "UK", "correctAnswer": false }
+      ],
+      "description": "Identify the country by its flag."
+    }
+  ]
+}

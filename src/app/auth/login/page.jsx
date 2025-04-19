@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,21 +7,21 @@ import { Separator } from "@/components/ui/separator";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react"; // Using Lucide icons
-import { useRouter } from "next/navigation.js";
-
+import { Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-  });
+  const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+
   const validate = () => {
-    const newErrors = { email: "", password: "" };
+    const newErrors = {};
+    const { email, password } = formData;
 
     if (!email) {
       newErrors.email = "Email is required.";
@@ -36,15 +36,36 @@ export default function LoginPage() {
     }
 
     setErrors(newErrors);
-    return Object.values(newErrors).every((error) => error === "");
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" }); // clear field error
+    setApiError(""); // clear api error
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) {
-      console.log("Form submitted");  
-      router.push("/onboarding")
-      // Submit form logic
+    if (!validate()) return;
+
+    setLoading(true);
+    try {
+      const response = await axios.post("http://localhost:8000/api/v1/auth/login", formData);
+      const { token, user, message } = response.data;
+
+      // Store in localStorage (or cookies, or context)
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      console.log(message);
+      router.push("/onboarding");
+    } catch (error) {
+      const errMsg =
+        error.response?.data?.message || "Something went wrong. Please try again.";
+      setApiError(errMsg);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -53,15 +74,19 @@ export default function LoginPage() {
       <img className="md:flex lg:hidden hidden w-[160px] mb-10" src={'/logo-on-light.png'} />
       <h2 className="text-xl font-bold text-gray-900 mb-4">Login to Your Account</h2>
       <p className="text-sm text-gray-500 mb-4">Access your personalized dashboard by logging into your account.</p>
+
+      {apiError && <p className="text-sm text-red-500 mb-3">{apiError}</p>}
+
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Email Address */}
+        {/* Email */}
         <div>
           <label className="text-sm font-medium text-gray-700">Email Address</label>
           <Input
             placeholder="Enter your email"
+            name="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleChange}
             className={`mt-1 ${errors.email ? 'border-red-500' : ''}`}
           />
           {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
@@ -73,9 +98,10 @@ export default function LoginPage() {
           <div className="relative">
             <Input
               placeholder="Enter your password"
+              name="password"
               type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={handleChange}
               className={`mt-1 ${errors.password ? 'border-red-500' : ''}`}
             />
             <span
@@ -88,22 +114,22 @@ export default function LoginPage() {
           {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
         </div>
 
-        {/* Forgot Password Link */}
+        {/* Forgot Password */}
         <div className="text-right text-sm text-blue-600 cursor-pointer">Forgot password?</div>
 
-        {/* Login Button */}
-        <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white">
-          Login
+        {/* Submit */}
+        <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
         </Button>
 
-        {/* Google Button */}
+        {/* Google */}
         <Separator className="my-2" />
         <Button variant="outline" className="w-full flex items-center justify-center gap-2">
           <FcGoogle className="text-lg" /> Continue with Google
         </Button>
       </form>
 
-      {/* Sign Up Link */}
+      {/* Sign Up */}
       <p className="text-sm text-center text-gray-600 mt-4">
         Don&apos;t have an account yet?{" "}
         <Link href={'/auth/signup'}>

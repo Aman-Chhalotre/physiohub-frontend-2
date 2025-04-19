@@ -121,29 +121,114 @@ const goals = [
     icon: '/firstaid.png',
   }
 ]
-
 export default function Onboarding() {
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(0);
+  const [formData, setFormData] = useState({
+    level: null,
+    pace: null,
+    interestAreas: [],
+    goals: [],
+    notification: null,
+  })
+  console.log(formData)
   const router = useRouter();
+  const handleStepData = (value) => {
+    setSelected((prev) => {
+      let updated = [...prev];
+      if (isMulti) {
+        if (updated.includes(value)) {
+          updated = updated.filter((item) => item !== value);
+        } else {
+          updated.push(value);
+        }
+      } else {
+        updated = [value];
+      }
+
+      // Update central formData
+      const keys = ["level", "pace", "interestAreas", "goals", "notification"];
+      setFormData({ ...formData, [keys[step - 1]]: isMulti ? updated : updated[0] });
+
+      return updated;
+    });
+  };
+
   const getStep = (step) => {
     switch (step) {
       case 0:
-        return <StartEnd onClick={()=>setStep(1)}/>
+        return <StartEnd onClick={() => setStep(1)} />;
       case 1:
-        return <Steps title="Set Your Level" subTitle="Please select your current level of knowledge in physiotherapy." data={levels} onNext={setStep} step={1}/>
+        return (
+          <Steps
+            title="Set Your Level"
+            subTitle="..."
+            data={levels}
+            onNext={setStep}
+            step={1}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 2:
-        return <Steps title="Choose Your Learning Pace" subTitle="How much time can you dedicate to learning each week?" data={pace} onNext={setStep}  step={2}/>
+        return (
+          <Steps
+            title="Choose Your Learning Pace"
+            subTitle="How much time can you dedicate to learning each week?"
+            data={pace}
+            onNext={setStep}
+            step={2}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 3:
-        return <Steps title="Select Your Areas of Interest" subTitle="What areas of physiotherapy are you most interested in? (Select all that apply)" isMulti data={area} onNext={setStep} step={3}/>
+        return (
+          <Steps
+            title="Select Your Areas of Interest"
+            subTitle="What areas of physiotherapy are you most interested in? (Select all that apply)"
+            isMulti
+            data={area}
+            onNext={setStep}
+            step={3}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 4:
-        return <Steps title="Personalized Goals" subTitle="What are your learning goals?" data={goals} onNext={setStep} isMulti step={4}/>
+        return (
+          <Steps
+            title="Personalized Goals"
+            subTitle="What are your learning goals?"
+            data={goals}
+            onNext={setStep}
+            isMulti
+            step={4}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 5:
-          return <Steps title="Notification Preferences" subTitle="How often would you like to receive notifications and reminders?" data={notifications} onNext={setStep} step={5}/> 
+        return (
+          <Steps
+            title="Notification Preferences"
+            subTitle="How often would you like to receive notifications and reminders?"
+            data={notifications}
+            onNext={setStep}
+            step={5}
+            formData={formData}
+            setFormData={setFormData}
+          />
+        );
       case 6:
-        return <StartEnd isEnd={true} onClick={()=>router.push('/user/dashboard')}/>
+        console.log("Final form data:", formData);
+        return <StartEnd isEnd={true} onClick={() => router.push("/user/dashboard")} />;
     }
-  }
-  return <div className="flex flex-col items-center min-h-screen bg-[#f7f7f7]">
-    {getStep(step)}
-  </div>
+  };
+  
+
+  return (
+    <div className="flex flex-col items-center min-h-screen bg-[#f7f7f7]">
+      {getStep(step)}
+    </div>
+  );
 }
