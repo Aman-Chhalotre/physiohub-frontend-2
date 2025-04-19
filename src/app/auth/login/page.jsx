@@ -51,7 +51,7 @@ export default function LoginPage() {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://45.94.31.205/api/v1/auth/login", formData);
+      const response = await axios.post("http://localhost:8000/api/v1/auth/login", formData);
       const { token, user, message } = response.data;
 
       // Store in localStorage (or cookies, or context)
