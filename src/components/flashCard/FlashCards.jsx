@@ -20,6 +20,7 @@ const articles = [
 ];
 
 export default function FlashCards({setShowInFlashCard}) {
+  
   return (
     <>
     <FlashCardHeader setShowInFlashCard={setShowInFlashCard}/>

@@ -11,11 +11,11 @@ import { useRouter } from "next/navigation";
 export default function Course({ setShowInCourse, data }) {
   const router = useRouter()
 
-  const handleCourseDelete = (id)=>{
-    const {data, error, status} = useDelete(`/courses/delete/${id}`)
-    console.log(data)
-    if(data.statusCode == 200){
-      router.refresh()
+  const handleCourseDelete = async(id)=>{
+    const {data, error, status} = await useDelete(`/courses/delete/${id}`)
+    console.log(status)
+    if(status === 200){
+      window.location.reload()
     }
   }
   return (

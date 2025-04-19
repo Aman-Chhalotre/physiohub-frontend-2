@@ -21,6 +21,8 @@ export default function CreateCourse({setShowInCourse}) {
     estimatedDuration: "",
     coverImage :null
   });
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
   const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
@@ -42,13 +44,16 @@ export default function CreateCourse({setShowInCourse}) {
   
 
   const handleUpload = async (e) => {
+    setLoading(true)
     const file = e.target.files[0];
   const formData = new FormData();
   formData.append('file', file);
 
     const {data, error, status} = await useImagePost(`/courses/upload-image`, formData)
-    setFormData((prev)=>({...prev, coverImage : data}))
-    console.log(data)
+    if(data){
+      setFormData((prev)=>({...prev, coverImage : data}))
+      setLoading(false)
+    }
   };
 
   const handleDrop = (event) => {
@@ -62,8 +67,12 @@ export default function CreateCourse({setShowInCourse}) {
 
   const handleCoursePublish = async () => {
     const {data, error, status} = await usePost(`/courses/create`, formData)
-    if(data){
+    if(status == 201){
       setShowInCourse("Course")
+    }
+    if(error){
+      console.log(error)
+      setError(error)
     }
   };
 
@@ -180,7 +189,7 @@ export default function CreateCourse({setShowInCourse}) {
           </label>
           <Input
             type="number"
-            placeholder="Write description here"
+            placeholder="Write Estimated Duration"
             className="my-5"
             name="estimatedDuration"
             onChange={handleChange}
@@ -198,7 +207,7 @@ export default function CreateCourse({setShowInCourse}) {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
-            <label className="ud-btn btn-white text-center cursor-pointer">
+            {loading? <div className="w-12 h-12 border-4 border-t-purple-600 border-b-transparent border-l-transparent border-r-transparent rounded-full animate-spin"></div>:<label className="ud-btn btn-white text-center cursor-pointer">
             <div className="icon mb5">
               <Upload className="w-6 h-6 mb-2 text-purple-600 justify-self-center " />
             </div>
@@ -221,7 +230,7 @@ export default function CreateCourse({setShowInCourse}) {
                 style={{ display: "none" }}
                 required
               />
-            </label>
+            </label>}
           </div> : <div>
             <Image src={formData.coverImage} height={400} width={200} alt="cover-image"/>
             </div>}

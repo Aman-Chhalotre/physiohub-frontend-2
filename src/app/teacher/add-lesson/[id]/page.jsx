@@ -108,9 +108,10 @@ export default function AddLessons({params}) {
       `/courses/upload`,
       formImageData
     );
+    
     if (data) {
       setLoading(false)
-      handleCardChange(index, "url", data);
+      handleCardChange(index, "url", data.data);
     }
   };
 
@@ -124,9 +125,9 @@ export default function AddLessons({params}) {
   };
 
   const handleLessonsAdd = async () => {
-    const {data, error, status} = usePost(`/courses/add-to-course/${id}`, formData)
+    const {data, error, status} = await usePost(`/courses/add-to-course/${id}`, formData)
     console.log(data)
-    if(data){
+    if(status == 200){
       router.push("/course")
     }
   };
